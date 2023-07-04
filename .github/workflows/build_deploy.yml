@@ -1,0 +1,30 @@
+name: Build and Deploy
+
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+
+            - name: Set GitHub Pages URL
+              run: echo "GH_PAGES_URL=https://${{ env.GITHUB_ACTOR }}.github.io/${{ env.GITHUB_REPOSITORY }}" >> $GITHUB_ENV
+
+            - name: Build
+              run: |
+                  yarn
+                  yarn build ${{ env.GH_PAGES_URL }}
+
+            - name: Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./dist
+                  cname: ExpressCollection
