@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Set GitHub Pages URL
-              run: echo "GH_PAGES_URL=https://${{ env.GITHUB_ACTOR }}.github.io/${{ env.GITHUB_REPOSITORY }}" >> $GITHUB_ENV
+              run: echo "GH_PAGES_URL=https://uniwebcms.github.io/website-starter" >> $GITHUB_ENV
 
             - name: Build
               run: |
